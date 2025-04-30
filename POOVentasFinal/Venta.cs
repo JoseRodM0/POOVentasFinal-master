@@ -1,13 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace POOVentasFinal
+﻿namespace POOVentasFinal
 {
     internal abstract class Venta
     {
-        public decimal Total { get; set; }
+        public decimal Total 
+        
+        {
+            get 
+            {
+                return CalcularTotal();
+            }
+        }
+
+        public List<ConceptoVenta> Conceptos { get; set; } = new List<ConceptoVenta>();
+        public virtual decimal CalcularTotal() 
+        {
+            decimal total = 0.00m;
+            foreach (ConceptoVenta concepto in Conceptos)
+            {
+                total += concepto.Importe;
+            }
+            return total;
+        }
     }
 }
